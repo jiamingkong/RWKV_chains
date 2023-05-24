@@ -1,6 +1,8 @@
 from langchain.prompts import PromptTemplate
 from .llm_math import LLM_MATH_PROMPT
 from .summarize import load_rwkv_summarize_chain
+from .llm_bash import LLMBashChain
+# from .qa_generation import QAGenerationChain
 
 TEMPLATE = """Below is an instruction that describes a task. Write a response that appropriately completes the request.
 # Instruction:
