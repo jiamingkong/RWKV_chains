@@ -8,14 +8,14 @@ from langchain.prompts.chat import (
 )
 from ..task_template import alpaca_styled_prompt
 
-prompt_template = """User: Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+prompt_template = """Use the following pieces of context to answer the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
 
 {context}
 
 Question: {question}
-Expert Answer: """
+"""
 PROMPT = PromptTemplate(
-    template=prompt_template, input_variables=["context", "question"]
+    template=alpaca_styled_prompt(instruction= prompt_template), input_variables=["context", "question"]
 )
 
 system_template = """User: Use the following pieces of context to answer the users question. 
