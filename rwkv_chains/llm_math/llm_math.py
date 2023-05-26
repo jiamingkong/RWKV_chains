@@ -1,4 +1,4 @@
-from ..task_template import generate_prompt
+from ..task_template import alpaca_styled_prompt
 from langchain.prompts.prompt import PromptTemplate
 
 
@@ -43,7 +43,7 @@ Question: {question}
 """
 
 
-_PROMPT_TEMPLATE_RWKV = generate_prompt(instruction=_PROMPT_TEMPLATE, response="")
+_PROMPT_TEMPLATE_RWKV = alpaca_styled_prompt(instruction=_PROMPT_TEMPLATE, response="")
 
 LLM_MATH_PROMPT = PromptTemplate(
     input_variables=["question"],

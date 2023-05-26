@@ -6,7 +6,7 @@ from langchain.prompts.chat import (
     SystemMessagePromptTemplate,
 )
 from langchain.prompts.prompt import PromptTemplate
-from ..task_template import generate_prompt
+from ..task_template import alpaca_styled_prompt
 
 templ1 = """You are a smart assistant designed to help high school teachers come up with reading comprehension questions.
 Given a piece of text, you must come up with a question and answer pair that can be used to test a student's reading comprehension abilities.
@@ -25,8 +25,8 @@ templ2 = """Please come up with a question/answer pair, in the specified JSON fo
 {text}"""
 CHAT_PROMPT = ChatPromptTemplate.from_messages(
     [
-        SystemMessagePromptTemplate.from_template(generate_prompt(instruction=templ1)),
-        HumanMessagePromptTemplate.from_template(generate_prompt(instruction=templ2)),
+        SystemMessagePromptTemplate.from_template(alpaca_styled_prompt(instruction=templ1)),
+        HumanMessagePromptTemplate.from_template(alpaca_styled_prompt(instruction=templ2)),
     ]
 )
 templ = """You are a smart assistant designed to help high school teachers come up with reading comprehension questions.
@@ -44,7 +44,7 @@ Everything between the ``` must be valid json.
 Please come up with a question/answer pair, in the specified JSON format, for the following text:
 ----------------
 {text}"""
-PROMPT = PromptTemplate.from_template(generate_prompt(instruction=templ) + "```")
+PROMPT = PromptTemplate.from_template(alpaca_styled_prompt(instruction=templ) + "```")
 
 PROMPT_SELECTOR = ConditionalPromptSelector(
     default_prompt=PROMPT, conditionals=[(is_chat_model, CHAT_PROMPT)]

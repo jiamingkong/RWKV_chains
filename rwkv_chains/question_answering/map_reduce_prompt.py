@@ -6,7 +6,6 @@ from langchain.prompts.chat import (
     SystemMessagePromptTemplate,
 )
 from langchain.prompts.prompt import PromptTemplate
-from ..task_template import generate_prompt
 
 question_prompt_template = """Use the following portion of a long document to see if any of the text is relevant to answer the question. 
 Return any relevant text verbatim.
@@ -14,7 +13,7 @@ Return any relevant text verbatim.
 Question: {question}
 Relevant text, if any:"""
 QUESTION_PROMPT = PromptTemplate(
-    template=generate_prompt(instruction=question_prompt_template), input_variables=["context", "question"]
+    template=question_prompt_template, input_variables=["context", "question"]
 )
 system_template = """Use the following portion of a long document to see if any of the text is relevant to answer the question. 
 Return any relevant text verbatim.

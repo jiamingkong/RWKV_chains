@@ -1,4 +1,4 @@
-def generate_prompt(instruction, input=None, response="\n# Response:\n"):
+def alpaca_styled_prompt(instruction, input=None, response="\n# Response:\n"):
     if input:
         return f"""Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
 

@@ -1,6 +1,6 @@
 # flake8: noqa
 from langchain.prompts import PromptTemplate
-from ..task_template import generate_prompt
+from ..task_template import alpaca_styled_prompt
 
 REFINE_PROMPT_TMPL = (
     "Your job is to produce a final summary\n"
@@ -15,7 +15,7 @@ REFINE_PROMPT_TMPL = (
 )
 REFINE_PROMPT = PromptTemplate(
     input_variables=["existing_answer", "text"],
-    template=generate_prompt(instruction=REFINE_PROMPT_TMPL),
+    template=alpaca_styled_prompt(instruction=REFINE_PROMPT_TMPL),
 )
 
 
@@ -24,4 +24,4 @@ prompt_template = """Write a concise summary of the following:
 
 "{text}"
 """
-PROMPT = PromptTemplate(template=generate_prompt(instruction=prompt_template), input_variables=["text"])
+PROMPT = PromptTemplate(template=alpaca_styled_prompt(instruction=prompt_template), input_variables=["text"])

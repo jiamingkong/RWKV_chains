@@ -6,7 +6,7 @@ from typing import List
 
 from langchain.prompts.prompt import PromptTemplate
 from langchain.schema import BaseOutputParser, OutputParserException
-from ..task_template import generate_prompt
+from ..task_template import alpaca_styled_prompt
 
 
 _PROMPT_TEMPLATE = """If someone asks you to perform a task, your job is to come up with a series of bash commands that will perform the task. There is no need to put "#!/bin/bash" in your answer. Make sure to reason step by step, using this format:
@@ -27,8 +27,8 @@ That is the format. Begin!
 
 Question: {question}
 
-# Response
 I need to take the following actions:
+
 """
 
 
@@ -65,6 +65,6 @@ class BashOutputParser(BaseOutputParser):
 
 PROMPT = PromptTemplate(
     input_variables=["question"],
-    template= generate_prompt(instruction=_PROMPT_TEMPLATE, response=""),
+    template= alpaca_styled_prompt(instruction=_PROMPT_TEMPLATE, response=""),
     output_parser=BashOutputParser(),
 )
