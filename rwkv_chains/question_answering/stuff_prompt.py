@@ -14,7 +14,8 @@ prompt_template = """Use the following pieces of context to answer the question 
 
 
 ---------------------
-According to the context above, {question}
+According to the context above, answer the question below:
+{question}
 """
 PROMPT = PromptTemplate(
     template=alpaca_styled_prompt(instruction= prompt_template), input_variables=["context", "question"]
