@@ -8,27 +8,37 @@ from langchain.prompts.prompt import PromptTemplate
 from langchain.schema import BaseOutputParser, OutputParserException
 from ..task_template import alpaca_styled_prompt
 
+# NOTE: This is the original one, but it didn't work too well with RWKV, some times RWKV will just repeat the commands in this prompt.
+# so we have provided a simpler one.
 
-_PROMPT_TEMPLATE = """If someone asks you to perform a task, your job is to come up with a series of bash commands that will perform the task. There is no need to put "#!/bin/bash" in your answer. Make sure to reason step by step, using this format:
+# _PROMPT_TEMPLATE = """If someone asks you to perform a task, your job is to come up with a series of bash commands that will perform the task. There is no need to put "#!/bin/bash" in your answer. Make sure to reason step by step, using this format:
 
-Question: "copy the files in the directory named 'target' into a new directory at the same level as target called 'myNewDirectory'"
+# Question: "copy the files in the directory named 'target' into a new directory at the same level as target called 'myNewDirectory'"
 
-I need to take the following actions:
-- List all files in the directory
-- Create a new directory
-- Copy the files from the first directory into the second directory
-```bash
-ls
-mkdir myNewDirectory
-cp -r target/* myNewDirectory
-```
+# I need to take the following actions:
+# - List all files in the directory
+# - Create a new directory
+# - Copy the files from the first directory into the second directory
 
-That is the format. Begin!
+# The commands are:
 
-Question: {question}
+# ```bash
+# ls
+# mkdir myNewDirectory
+# cp -r target/* myNewDirectory
+# ```
 
-I need to take the following actions:
+# That is the format. Begin!
 
+# Question: {question}
+
+# I need to take the following actions:
+
+# """
+
+_PROMPT_TEMPLATE = """Write out the bash command step by step to perform the task user specified:
+
+Task: {question}
 """
 
 
@@ -65,6 +75,6 @@ class BashOutputParser(BaseOutputParser):
 
 PROMPT = PromptTemplate(
     input_variables=["question"],
-    template= alpaca_styled_prompt(instruction=_PROMPT_TEMPLATE, response=""),
+    template= alpaca_styled_prompt(instruction=_PROMPT_TEMPLATE, response="\n# Response:\n```bash"),
     output_parser=BashOutputParser(),
 )
